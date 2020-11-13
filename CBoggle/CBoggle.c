@@ -28,6 +28,7 @@ static void displayBoard(char board[BOARD_HEIGHT][BOARD_WIDTH])
         }
         printf("\n");
     }
+    printf("\n");
 }
 
 int main()

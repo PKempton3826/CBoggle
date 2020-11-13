@@ -23,16 +23,16 @@ void newBoard(char board[BOARD_HEIGHT][BOARD_WIDTH])
         }
     }
 
-    // shuffle board (performs the Fisher Yates shuffle 3 times).
-    char buff; // temp buffer for shuffling
-    const int NUM_SHUFFLES = 3; // number of times to do the shuffle
-
-    // 
+    // setup vars for indices and buffers.
     int randIndex;
     int randRow;
     int randCol;
     int currRow;
     int currCol;
+    char buff;
+
+    // shuffle the chars around (performs Fisher-Yates shuffle 3 times)
+    const int NUM_SHUFFLES = 3; // number of times to do the shuffle
     for (int j = 0; j < NUM_SHUFFLES; j++)
     {
         for (int i = BOARD_HEIGHT * BOARD_WIDTH - 1; i > 0; i--)
