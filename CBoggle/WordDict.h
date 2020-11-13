@@ -18,8 +18,8 @@
 // represents a character node within the word dictionary.
 typedef struct Node
 {
-  int isEndOfWord; // 1 if true, 0 otherwise.
-  struct Node* characters[ALPHABET_SIZE]; // 1 ptr for each letter in alphabet.
+    int isEndOfWord; // 1 if true, 0 otherwise.
+    struct Node* characters[ALPHABET_SIZE]; // 1 ptr for each letter in alphabet.
 } DictNode;
 
 // function declarations.
@@ -29,6 +29,5 @@ DictNode* getNewDictNode();
 int searchWordDict(DictNode* head, char* word);
 int hasChildren(DictNode* curr);
 void clearWordDict(DictNode* curr);
-
 
 #endif // !__WORDDICT_H__

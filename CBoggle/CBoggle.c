@@ -8,8 +8,27 @@
 
 #include "BoggleBoard.h"
 
-// declaration for function to display a Boggle board.
-void displayBoard(char* board[BOARD_HEIGHT * BOARD_WIDTH]);
+// Function: displayBoard
+// Description: Displays a Boggle board in the console window.
+// Parameters: 
+//    board: The Boggle board to display.
+// Returns: n/a.
+static void displayBoard(char board[BOARD_HEIGHT * BOARD_WIDTH])
+{
+    for (int i = 0; i < BOARD_HEIGHT * BOARD_WIDTH; i++)
+    {
+        printf(" %-2c", board[i]);
+        if (i % BOARD_WIDTH == (BOARD_WIDTH - 1))
+        {
+            printf("\n");
+        }
+        else
+        {
+            printf(" | ");
+        }
+    }
+    printf("\n");
+}
 
 int main()
 {
@@ -17,7 +36,7 @@ int main()
     srand((unsigned int)time(0));
 
     // initialize Boggle board.
-    char* board[BOARD_HEIGHT * BOARD_WIDTH];
+    char board[BOARD_HEIGHT * BOARD_WIDTH];
     newBoard(board);
     
     // enter application running loop.
@@ -55,27 +74,4 @@ int main()
     } while (c != '3');
     // user pressed '3'.
     // Exit application.
-}
-
-
-// Function: displayBoard
-// Description: Displays a Boggle board in the console window.
-// Parameters: 
-//      board:  The Boggle board to display.
-// Returns: n/a.
-void displayBoard(char* board[BOARD_HEIGHT * BOARD_WIDTH])
-{
-    for (int i = 0; i < BOARD_HEIGHT * BOARD_WIDTH; i++)
-    {
-        printf(" %-2s", board[i]);
-        if (i % BOARD_WIDTH == (BOARD_WIDTH - 1))
-        {
-            printf("\n");
-        }
-        else
-        {
-            printf(" | ");
-        }
-    }
-    printf("\n");
 }
