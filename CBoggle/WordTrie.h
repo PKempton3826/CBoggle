@@ -15,12 +15,11 @@
 #define ALPHABET_SIZE 26
 
 // Struct for a Trie node.
-struct Trie
+typedef struct Trie
 {
 	int isLeaf;	// 1 if true, 0 otherwise.
-	struct TrieNode* character[ALPHABET_SIZE];
-}; 
-typedef struct Trie TrieNode;
+	struct Trie* character[ALPHABET_SIZE];
+} TrieNode; 
 
 // Function declarations
 TrieNode* getNewTrieNode(); // create new Trie node.
