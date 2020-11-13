@@ -24,11 +24,12 @@ DictNode* createWordDict(char* fileName)
         head = getNewDictNode();
         while (fgets(word, MAX_WORD_LEN - 1, fp) != NULL)
         {
-            // got a word, strip off the '\n' if fgets left one on.
+            // got a word, strip off the '\n' and make the word lowercase.
             if (word[strlen(word) - 1] == '\n')
             {
                 word[strlen(word) - 1] = '\0';
             }
+            lowerCaseify(word);
             
             // insert word into the dictionary.
             insertIntoWordDict(head, word);

@@ -13,21 +13,21 @@
 // Parameters: 
 //    board: The Boggle board to display.
 // Returns: n/a.
-static void displayBoard(char board[BOARD_HEIGHT * BOARD_WIDTH])
+static void displayBoard(char board[BOARD_HEIGHT][BOARD_WIDTH])
 {
-    for (int i = 0; i < BOARD_HEIGHT * BOARD_WIDTH; i++)
+    // display each character separated by '|' characters.
+    for (int row = 0; row < BOARD_HEIGHT; row++)
     {
-        printf(" %-2c", board[i]);
-        if (i % BOARD_WIDTH == (BOARD_WIDTH - 1))
+        for (int col = 0; col < BOARD_WIDTH; col++)
         {
-            printf("\n");
+            printf(" %c ", board[row][col]);
+            if (col < BOARD_WIDTH - 1)
+            {
+                printf("|");
+            }
         }
-        else
-        {
-            printf(" | ");
-        }
+        printf("\n");
     }
-    printf("\n");
 }
 
 int main()
@@ -36,7 +36,7 @@ int main()
     srand((unsigned int)time(0));
 
     // initialize Boggle board.
-    char board[BOARD_HEIGHT * BOARD_WIDTH];
+    char board[BOARD_HEIGHT][BOARD_WIDTH];
     newBoard(board);
     
     // enter application running loop.

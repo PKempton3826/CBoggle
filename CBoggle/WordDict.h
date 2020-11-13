@@ -1,4 +1,4 @@
-// File: WordDict.c
+// File: WordDict.h
 // Project: CBoggle
 // Programmer: Philip Kempton
 // First Version: 2020-11-12
@@ -11,6 +11,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include "Common.h"
 
 #define ALPHABET_SIZE 26 // 26 letters in English alphabet.
 #define MAX_WORD_LEN 50 // arbitrarily assume max chars for max word length.

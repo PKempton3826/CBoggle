@@ -41,6 +41,6 @@ static const char CUBE_DATA[CUBE_COUNT][CUBE_SIDE_COUNT] = {
 };
 
 // declaration for the newBoard function.
-void newBoard(char board[BOARD_HEIGHT * BOARD_WIDTH]);
+void newBoard(char board[BOARD_HEIGHT][BOARD_WIDTH]);
 
 #endif // !__BOGGLEBOARD_H__

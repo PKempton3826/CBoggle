@@ -12,25 +12,42 @@
 // Parameters:
 //    board: the board to populate.
 // Returns: n/a.
-void newBoard(char board[BOARD_HEIGHT * BOARD_WIDTH])
+void newBoard(char board[BOARD_HEIGHT][BOARD_WIDTH])
 {
-    // roll the cubes.
-    for (int i = 0; i < BOARD_HEIGHT * BOARD_WIDTH; i++)
+    // roll the cubes
+    for (int row = 0; row < BOARD_HEIGHT; row++)
     {
-        board[i] = CUBE_DATA[i][rand() % CUBE_SIDE_COUNT];
+        for (int col = 0; col < BOARD_WIDTH; col++)
+        {
+            board[row][col] = CUBE_DATA[col + (BOARD_WIDTH * row)][rand() % CUBE_SIDE_COUNT];
+        }
     }
 
     // shuffle board (performs the Fisher Yates shuffle 3 times).
-    char buff;
-    const int NUM_SHUFFLES = 3;
+    char buff; // temp buffer for shuffling
+    const int NUM_SHUFFLES = 3; // number of times to do the shuffle
+
+    // 
+    int randIndex;
+    int randRow;
+    int randCol;
+    int currRow;
+    int currCol;
     for (int j = 0; j < NUM_SHUFFLES; j++)
     {
         for (int i = BOARD_HEIGHT * BOARD_WIDTH - 1; i > 0; i--)
         {
-            buff = board[i];
-            int randIndex = rand() % i;
-            board[i] = board[randIndex];
-            board[randIndex] = buff;
+            // get current index for row and column
+            currRow = (int)(i / BOARD_WIDTH);
+            currCol = i % BOARD_WIDTH;
+
+            // get a random index to swap with curr
+            randIndex = rand() % i;
+            randRow = (int)(randIndex / BOARD_WIDTH);
+            randCol = randIndex % BOARD_WIDTH;
+            buff = board[currRow][currCol];
+            board[currRow][currCol] = board[randRow][randCol];
+            board[randRow][randCol] = buff;
         }
     }
 }
