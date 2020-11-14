@@ -15,36 +15,39 @@
 //    col:     col index for beginning of word.
 //    head:    head node of the word dictionary.
 // Returns: n/a.
-static void findWordsAtIndex(char board[BOARD_HEIGHT][BOARD_WIDTH], int visited[BOARD_HEIGHT][BOARD_WIDTH], 
+static void findWordsAtIndex(char board[BOARD_HEIGHT][BOARD_WIDTH], 
     int row, int col, char str[MAX_WORD_LEN], DictNode* head)
 {
-    visited[row][col] = 1;
-    str[strlen(str)] = board[row][col];
-
-    // display word if it exists in word dictionary.
-    lowerCaseify(str);
-    if (searchWordDict(head, str) == 1)
+    if (board[row][col] != '\0')
     {
-        printf("%s\n", str);
-    }
+        str[strlen(str)] = board[row][col];
+        board[row][col] = '\0';
 
-    // check the 8 adjacent cells of board[row][col].
-    for (int currRow = row - 1; currRow <= row + 1 && currRow < BOARD_HEIGHT; currRow++)
-    {
-        for (int currCol = col - 1; currCol <= col + 1 && currCol < BOARD_WIDTH; currCol++)
+        // display word if it exists in word dictionary.
+        lowerCaseify(str);
+        if (searchWordDict(head, str) == 1)
         {
-            if (currRow >= 0 && currCol >= 0 && (visited[currRow][currCol] == 0))
+            printf("%s\n", str);
+        }
+
+        // check the 8 adjacent cells of board[row][col].
+        for (int currRow = row - 1; currRow <= row + 1 && currRow < BOARD_HEIGHT; currRow++)
+        {
+            for (int currCol = col - 1; currCol <= col + 1 && currCol < BOARD_WIDTH; currCol++)
             {
-                // all indices are valid and we haven't checked this cell yet.
-                // recursive call to check for longer words.
-                findWordsAtIndex(board, visited, currRow, currCol, str, head);
+                if (currRow >= 0 && currCol >= 0)
+                {
+                    // all indices are valid and we haven't checked this cell yet.
+                    // recursive call to check for longer words.
+                    findWordsAtIndex(board, currRow, currCol, str, head);
+                }
             }
         }
-    }
 
-    // remove the character that was added and mark the spot as not-visited.
-    str[strlen(str) - 1] = 0;
-    visited[row][col] = 0;
+        // remove the character that was added and mark the spot as not-visited.
+        board[row][col] = str[strlen(str) - 1];
+        str[strlen(str) - 1] = '\0';
+    }
 }
 
 
@@ -57,9 +60,6 @@ static void findWordsAtIndex(char board[BOARD_HEIGHT][BOARD_WIDTH], int visited[
 // Returns: n/a.
 void solveBoggleBoard(char board[BOARD_HEIGHT][BOARD_WIDTH], DictNode* head)
 {
-    // setup a grid to track which cells have been visited.
-    int visited[BOARD_HEIGHT][BOARD_WIDTH] = { { 0 } };
-
     // initialize an empty string to track current word being checked.
     char str[MAX_WORD_LEN] = { { '\0' } };
 
@@ -68,7 +68,7 @@ void solveBoggleBoard(char board[BOARD_HEIGHT][BOARD_WIDTH], DictNode* head)
     {
         for (int col = 0; col < BOARD_WIDTH; col++)
         {
-            findWordsAtIndex(board, visited, row, col, str, head);
+            findWordsAtIndex(board, row, col, str, head);
         }
     }
 }
