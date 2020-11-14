@@ -15,7 +15,7 @@
 //    col:     col index for beginning of word.
 //    head:    head node of the word dictionary.
 // Returns: n/a.
-void findWordsAtIndex(char board[BOARD_HEIGHT][BOARD_WIDTH], int visited[BOARD_HEIGHT][BOARD_WIDTH], 
+static void findWordsAtIndex(char board[BOARD_HEIGHT][BOARD_WIDTH], int visited[BOARD_HEIGHT][BOARD_WIDTH], 
     int row, int col, char str[MAX_WORD_LEN], DictNode* head)
 {
     visited[row][col] = 1;
@@ -61,7 +61,7 @@ void solveBoggleBoard(char board[BOARD_HEIGHT][BOARD_WIDTH], DictNode* head)
     int visited[BOARD_HEIGHT][BOARD_WIDTH] = { { 0 } };
 
     // initialize an empty string to track current word being checked.
-    char str[MAX_WORD_LEN] = { { 0 } };
+    char str[MAX_WORD_LEN] = { { '\0' } };
 
     // find and display all words found at each potential starting point.
     for (int row = 0; row < BOARD_HEIGHT; row++)

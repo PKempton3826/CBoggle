@@ -150,13 +150,11 @@
     <ClCompile Include="BoggleBoard.c" />
     <ClCompile Include="BoggleSolver.c" />
     <ClCompile Include="CBoggle.c" />
-    <ClCompile Include="Common.c" />
     <ClCompile Include="WordDict.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoggleBoard.h" />
     <ClInclude Include="BoggleSolver.h" />
-    <ClInclude Include="Common.h" />
     <ClInclude Include="WordDict.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

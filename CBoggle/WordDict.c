@@ -6,14 +6,81 @@
 //              This word dictionary was designed based on a Trie implementaion found here:
 //              https://www.techiedelight.com/trie-implementation-insert-search-delete/
 
+#include <stdlib.h>
+#include <stdio.h>
 #include "WordDict.h"
+#include "BoggleBoard.h"
+
+// Function: getNewDictNode
+// Description: creates a new word dictionary node.
+// Parameters: n/a.
+// Returns: new word dictionary node ptr.
+static DictNode* getNewDictNode(void)
+{
+    // malloc space for new node and mark it as non-endOfWord.
+    DictNode* node = (struct DictNode*)calloc(1, sizeof(DictNode));
+    if (node != NULL)
+    {
+        node->isEndOfWord = 0;
+    }
+    return node;
+}
+
+
+// Function: insertIntoWordDict
+// Description: inserts a word into a word dictionary.
+// Parameters:
+//    head: head ptr of the word dictionary to insert into.
+//    word: the word to insert.
+// Returns: n/a.
+static void insertIntoWordDict(DictNode* head, const char* word)
+{
+    // start at head.
+    DictNode* curr = head;
+
+    // put each character of the word into the word dictionary if it doesn't already exist.
+    while (*word != NULL)
+    {
+        if (curr->characters[*word - 'a'] == NULL)
+        {
+            // character is not currently in place in the word dict, so add it in.
+            curr->characters[*word - 'a'] = getNewDictNode();
+        }
+        // move to next character.
+        curr = curr->characters[*word - 'a'];
+        word++;
+    }
+    // all characters of word have been inserted.
+    curr->isEndOfWord = 1;
+}
+
+
+// Function: hasChildren
+// Description: checks if a word dictionary node has any children nodes (non-NULLs).
+// Parameters:
+//    curr: node to check for presence of children.
+// Returns: 1 if node has children, 0 otherwise.
+static int hasChildren(DictNode* curr)
+{
+    // check each character node.
+    for (int i = 0; i < ALPHABET_SIZE; i++)
+    {
+        if (curr->characters[i] != NULL)
+        {
+            // child found.
+            return 1;
+        }
+    }
+    return 0;
+}
+
 
 // Function: CreateWordDict
 // Description: creates a new word dict from a file.
 // Parameters:
 //    fileName: filename for list of words.
 // Returns: head ptr to the new word dictionary.
-DictNode* createWordDict(char* fileName)
+DictNode* createWordDict(const char* fileName)
 {
     DictNode* head = NULL;
     char word[MAX_WORD_LEN];
@@ -38,50 +105,6 @@ DictNode* createWordDict(char* fileName)
     return head;
 }
 
-// Function: insertIntoWordDict
-// Description: inserts a word into a word dictionary.
-// Parameters:
-//    head: head ptr of the word dictionary to insert into.
-//    word: the word to insert.
-// Returns: n/a.
-void insertIntoWordDict(DictNode* head, char* word)
-{
-    // start at head.
-    DictNode* curr = head;
-    
-    // put each character of the word into the word dictionary if it doesn't already exist.
-    while (*word != NULL)
-    {
-        if (curr->characters[*word - 'a'] == NULL)
-        {
-            // character is not currently in place in the word dict, so add it in.
-            curr->characters[*word - 'a'] = getNewDictNode();
-        }
-        // move to next character.
-        curr = curr->characters[*word - 'a'];
-        word++;
-    }
-    // all characters of word have been inserted.
-    curr->isEndOfWord = 1;
-}
-
-// Function: getNewDictNode
-// Description: creates a new word dictionary node.
-// Parameters: n/a.
-// Returns: new word dictionary node ptr.
-DictNode* getNewDictNode()
-{
-    // malloc space for new node and mark it as non-endOfWord.
-    DictNode* node = (struct DictNode*)malloc(sizeof(DictNode));
-    node->isEndOfWord = 0;
-    
-    // init all chars to NULL to signify it currently has no children.
-    for (int i = 0; i < ALPHABET_SIZE; i++)
-    {
-        node->characters[i] = NULL;
-    }
-    return node;
-}
 
 // Function: search
 // Description: searches a word dictionary for the presence of a word.
@@ -89,7 +112,7 @@ DictNode* getNewDictNode()
 //    head: head node of the word dictionary to search within.
 //    str:  str to search for.
 // Returns: 1 if word is found, 0 otherwise.
-int searchWordDict(DictNode* head, char* word)
+int searchWordDict(DictNode* head, const char* word)
 {
     // sanity check incase word dictionary is empty.
     if (head == NULL)
@@ -113,28 +136,6 @@ int searchWordDict(DictNode* head, char* word)
     return curr->isEndOfWord;
 }
 
-// Function: hasChildren
-// Description: checks if a word dictionary node has any children nodes (non-NULLs).
-// Parameters:
-//    curr: node to check for presence of children.
-// Returns: 1 if node has children, 0 otherwise.
-int hasChildren(DictNode* curr)
-{
-    // flag for tracking if child has been found.
-    int hasChildren = 0;
-    
-    // check each character node.
-    for (int i = 0; i < ALPHABET_SIZE; i++)
-    {
-        if (curr->characters[i] != NULL)
-        {
-            // child found, set flag and break out of loop.
-            hasChildren = 1;
-            break;
-        }
-    }
-    return hasChildren;
-}
 
 // Function: clear
 // Description: frees all malloc'd space in a word dictionary.

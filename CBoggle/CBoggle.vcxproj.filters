@@ -24,9 +24,6 @@
     <ClCompile Include="WordDict.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Common.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BoggleSolver.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -36,9 +33,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WordDict.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BoggleSolver.h">

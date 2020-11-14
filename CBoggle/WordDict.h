@@ -6,12 +6,8 @@
 //              This word dictionary was designed based on a Trie implementaion found here:
 //              https://www.techiedelight.com/trie-implementation-insert-search-delete/
 
-#ifndef __WORDDICT_H__
-#define __WORDDICT_H__
-
-#include <stdlib.h>
-#include <stdio.h>
-#include "Common.h"
+#ifndef _WORDDICT_H_
+#define _WORDDICT_H_
 
 #define ALPHABET_SIZE 26 // 26 letters in English alphabet.
 
@@ -24,10 +20,7 @@ typedef struct Node
 
 // function declarations.
 DictNode* createWordDict(char* fileName);
-void insertIntoWordDict(DictNode* head, char* word);
-DictNode* getNewDictNode();
 int searchWordDict(DictNode* head, char* word);
-int hasChildren(DictNode* curr);
 void clearWordDict(DictNode* curr);
 
-#endif // !__WORDDICT_H__
+#endif // !_WORDDICT_H_

@@ -6,7 +6,10 @@
 //              the creation and shuffling of a Boggle game board.  Additionally, this application
 //              automatically finds and displays all English words found on a Boggle game board.
 
+#include <stdio.h>
 #include "BoggleBoard.h"
+#include "BoggleSolver.h"
+#include "WordDict.h"
 
 // Function: displayBoard
 // Description: Displays a Boggle board in the console window.
@@ -31,7 +34,7 @@ static void displayBoard(char board[BOARD_HEIGHT][BOARD_WIDTH])
     printf("\n");
 }
 
-int main()
+int main(void)
 {
     // seed rand with curr time.
     srand((unsigned int)time(0));
