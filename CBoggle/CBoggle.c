@@ -16,7 +16,7 @@
 // Parameters: 
 //    board: The Boggle board to display.
 // Returns: n/a.
-static void displayBoard(char board[BOARD_HEIGHT][BOARD_WIDTH])
+static void displayBoard(const char board[BOARD_HEIGHT][BOARD_WIDTH])
 {
     // display each character separated by '|' characters.
     for (int row = 0; row < BOARD_HEIGHT; row++)
