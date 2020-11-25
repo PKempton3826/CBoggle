@@ -86,6 +86,7 @@ void lowerCaseify(char* str)
             {
                 *curr = *curr + 32;
             }
+            curr++;
         }
     }
 }

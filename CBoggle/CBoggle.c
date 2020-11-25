@@ -42,7 +42,10 @@ int main(void)
     // initialize Boggle board.
     char board[BOARD_HEIGHT][BOARD_WIDTH];
     newBoard(board);
-    
+
+    // create the dictionary of words
+    DictNode* head = createWordDict("words.txt");
+
     // enter application running loop.
     char c = '1';
     do
@@ -62,7 +65,8 @@ int main(void)
         case '2':
             // user pressed '2'.
             // find all words and display them for the user.
-            printf("Not implemented\n\n");
+            solveBoggleBoard(board, head);
+            printf("\n");
             printf("Press any key for new board...\n");
             getch(stdin);
             // intentional fallthrough.
@@ -76,6 +80,6 @@ int main(void)
             // this will cause the input to be ignored as user entered an invalid option.
         }
     } while (c != '3');
-    // user pressed '3'.
-    // Exit application.
+    // user pressed '3', clear the dictionary and exit.
+    clearWordDict(head);
 }
